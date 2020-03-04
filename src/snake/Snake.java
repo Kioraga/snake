@@ -42,6 +42,7 @@ public class Snake {
 
         int time = 30;
         final int[] dir = {4};
+        final int[] auxDir = new int[400];
         final int[] f = {9};
         final int[] c = {5};
         final double[] x = {tablero[f[0]][c[0]].getX()};
@@ -87,6 +88,34 @@ public class Snake {
 
                 gc.drawImage(background, 0, 0);
                 gc.drawImage(snake, x[0], y[0]);
+
+                /*auxDir[0] = dir[0];
+                double auxX = x[0];
+                double auxY = y[0];
+                for (int i = 0; i < 5; i++) {
+                    switch (auxDir[i]) {
+                        case 1:
+                            auxY = auxY + 25;
+                            auxDir[i+1] = 1;
+                            gc.drawImage(snake, x[0], auxY);
+                            break;
+                        case 2:
+                            auxX = auxX + 25;
+                            auxDir[i+1] = 2;
+                            gc.drawImage(snake, auxX, y[0]);
+                            break;
+                        case 3:
+                            auxY = auxY - 25;
+                            auxDir[i+1] = 3;
+                            gc.drawImage(snake, x[0], auxY);
+                            break;
+                        case 4:
+                            auxX = auxX - 25;
+                            auxDir[i+1] = 4;
+                            gc.drawImage(snake, auxX, y[0]);
+                            break;
+                    }
+                }*/
 
                 try {
                     Thread.sleep(200);
