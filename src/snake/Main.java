@@ -26,7 +26,7 @@ public class Main extends Application {
 
     public static Scene titleScreen() throws Exception {
         Parent root = FXMLLoader.load(Main.class.getResource("menu.fxml"));
-        return new Scene(root, 560, 590);
+        return new Scene(root, 550, 580);
     }
 
     public static Stage getPrimaryStage() {

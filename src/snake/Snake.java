@@ -8,7 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Snake {
@@ -48,6 +47,8 @@ public class Snake {
         final int[] dir = {4};
         final int[] f = {11};
         final int[] c = {7};
+        final int[] fComida = {0};
+        final int[] cComida = {0};
         final double[] x = {tablero[f[0]][c[0]].getX()};
         final double[] y = {tablero[f[0]][c[0]].getY()};
         final double auxX[] = new double[400];
@@ -93,13 +94,19 @@ public class Snake {
                         break;
                 }
 
-                //Dibuja el fondo y el bloque base de la serpiente
+                //Dibuja el fondo
                 gc.drawImage(background, 0, 0);
-                foodGen[0] = Snake.generarComida(gc, food, tablero, foodGen[0]);
-                gc.drawImage(snakeSp, x[0], y[0]);
 
-                //Muestra las cordenadas actuales
-                System.out.println("x: "+x[0]+" | y: "+y[0]);
+                //Dibuja la comida en una casilla aleatoria
+                if (foodGen[0]) {
+                    fComida[0] = (int) ((Math.random() * 19) + 1);
+                    cComida[0] = (int) ((Math.random() * 19) + 1);
+                }
+                gc.drawImage(food, tablero[fComida[0]][cComida[0]].getX(), tablero[fComida[0]][cComida[0]].getY());
+                foodGen[0] = false;
+
+                //Dibuja el bloque principal de la seroiente
+                gc.drawImage(snakeSp, x[0], y[0]);
 
                 //Dibuja el resto de bloques que forman la serpiente a partir de la variable "snakeSize"
                 for (int i = 0; i < snakeSize[0]-1; i++) {
@@ -112,13 +119,17 @@ public class Snake {
                 auxX[0] = x[0];
                 auxY[0] = y[0];
 
+                //Muestra las cordenadas actuales
+                System.out.println("x: "+x[0]+" | y: "+y[0]);
+
+                //Aumenta el tamaño de la serpiente al comer
+                if (Snake.comer(fComida, cComida, x, y, tablero)) {
+                    snakeSize[0]++;
+                    foodGen[0] = true;
+                }
+
                 //Detiene el AnimationTimer si se cumplen las condiciones
                 if (Snake.colisionPared(x, y)) {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "¡Has perdido!",
-                            "Snake by dcancelas",
-                            JOptionPane.PLAIN_MESSAGE);
                     try {
                         Snake.goToTitleScreen();
                     } catch (Exception e) {
@@ -139,14 +150,13 @@ public class Snake {
         return escena;
     }
 
-    public static boolean generarComida(GraphicsContext gc, Image food, Tablero[][] tablero, boolean foodGen) {
-        int f = 0;
-        int c = 0;
-        if (foodGen = true) {
-            f = (int) ((Math.random() * 19) + 1);
-            c = (int) ((Math.random() * 19) + 1);
+    public static boolean comer(int[] fComida, int[] cComida, double[] x, double[] y, Tablero[][] tablero) {
+        double xComida = tablero[fComida[0]][cComida[0]].getX();
+        double yComida = tablero[fComida[0]][cComida[0]].getY();
+
+        if (xComida == x[0] && yComida == y[0]) {
+            return true;
         }
-        gc.drawImage(food, tablero[f][c].getX(), tablero[f][c].getY());
         return false;
     }
 
