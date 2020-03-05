@@ -36,17 +36,19 @@ public class Snake {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         Image background = new Image("file:resources/background.png");
-        Image snake = new Image("file:resources/snake.png");
+        Image snakeSp = new Image("file:resources/snake.png");
 
         Tablero[][] tablero = Tablero.crearTablero();
 
-        int time = 30;
+        final int[] snakeSize = {2};
+        final int[] auxSnSize = {0};
         final int[] dir = {4};
-        final int[] auxDir = new int[400];
         final int[] f = {9};
         final int[] c = {5};
         final double[] x = {tablero[f[0]][c[0]].getX()};
         final double[] y = {tablero[f[0]][c[0]].getY()};
+        final double auxX[] = new double[400];
+        final double auxY[] = new double[400];
 
         new AnimationTimer() {
             public void handle(long now) {
@@ -87,35 +89,19 @@ public class Snake {
                 }
 
                 gc.drawImage(background, 0, 0);
-                gc.drawImage(snake, x[0], y[0]);
+                gc.drawImage(snakeSp, x[0], y[0]);
 
-                /*auxDir[0] = dir[0];
-                double auxX = x[0];
-                double auxY = y[0];
-                for (int i = 0; i < 5; i++) {
-                    switch (auxDir[i]) {
-                        case 1:
-                            auxY = auxY + 25;
-                            auxDir[i+1] = 1;
-                            gc.drawImage(snake, x[0], auxY);
-                            break;
-                        case 2:
-                            auxX = auxX + 25;
-                            auxDir[i+1] = 2;
-                            gc.drawImage(snake, auxX, y[0]);
-                            break;
-                        case 3:
-                            auxY = auxY - 25;
-                            auxDir[i+1] = 3;
-                            gc.drawImage(snake, x[0], auxY);
-                            break;
-                        case 4:
-                            auxX = auxX - 25;
-                            auxDir[i+1] = 4;
-                            gc.drawImage(snake, auxX, y[0]);
-                            break;
-                    }
-                }*/
+                System.out.println("x: "+x[0]+" | y: "+y[0]);
+
+                for (int i = 0; i < snakeSize[0]-1; i++) {
+                    gc.drawImage(snakeSp, auxX[i], auxY[i]);
+                }
+                for (int i = snakeSize[0]-2; i > 0; i--) {
+                    auxX[i] = auxX[i-1];
+                    auxY[i] = auxY[i-1];
+                }
+                auxX[0] = x[0];
+                auxY[0] = y[0];
 
                 try {
                     Thread.sleep(200);
@@ -126,5 +112,9 @@ public class Snake {
         }.start();
 
         return escena;
+    }
+
+    public void compColisionPared() {
+        
     }
 }
