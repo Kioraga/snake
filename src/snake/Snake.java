@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Snake {
@@ -37,14 +39,15 @@ public class Snake {
 
         Image background = new Image("file:resources/background.png");
         Image snakeSp = new Image("file:resources/snake.png");
+        Image food = new Image("file:resources/food.png");
 
         Tablero[][] tablero = Tablero.crearTablero();
 
         final int[] snakeSize = {2};
-        final int[] auxSnSize = {0};
+        final boolean[] foodGen = {true};
         final int[] dir = {4};
-        final int[] f = {9};
-        final int[] c = {5};
+        final int[] f = {11};
+        final int[] c = {7};
         final double[] x = {tablero[f[0]][c[0]].getX()};
         final double[] y = {tablero[f[0]][c[0]].getY()};
         final double auxX[] = new double[400];
@@ -52,6 +55,7 @@ public class Snake {
 
         new AnimationTimer() {
             public void handle(long now) {
+                //Comprueba la tecla pulsada y establece la dirección
                 if ((input.contains("W") || input.contains("UP"))  && dir[0] != 3)
                     dir[0] = 1;
                 if ((input.contains("A") || input.contains("LEFT")) && dir[0] != 4)
@@ -61,6 +65,7 @@ public class Snake {
                 if ((input.contains("D") || input.contains("RIGHT")) && dir[0] != 2)
                     dir[0] = 4;
 
+                //Comprueba la dirección y actualiza la cordenada correspondiente
                 switch (dir[0]) {
                     case 1:
                         if (f[0] > 0) {
@@ -75,24 +80,28 @@ public class Snake {
                         }
                         break;
                     case 3:
-                        if (f[0] < 19) {
+                        if (f[0] < 21) {
                             f[0] = f[0] + 1;
                             y[0] = tablero[f[0]][c[0]].getY();
                         }
                         break;
                     case 4:
-                        if (c[0] < 19) {
+                        if (c[0] < 21) {
                             c[0] = c[0] + 1;
                             x[0] = tablero[f[0]][c[0]].getX();
                         }
                         break;
                 }
 
+                //Dibuja el fondo y el bloque base de la serpiente
                 gc.drawImage(background, 0, 0);
+                foodGen[0] = Snake.generarComida(gc, food, tablero, foodGen[0]);
                 gc.drawImage(snakeSp, x[0], y[0]);
 
+                //Muestra las cordenadas actuales
                 System.out.println("x: "+x[0]+" | y: "+y[0]);
 
+                //Dibuja el resto de bloques que forman la serpiente a partir de la variable "snakeSize"
                 for (int i = 0; i < snakeSize[0]-1; i++) {
                     gc.drawImage(snakeSp, auxX[i], auxY[i]);
                 }
@@ -103,6 +112,22 @@ public class Snake {
                 auxX[0] = x[0];
                 auxY[0] = y[0];
 
+                //Detiene el AnimationTimer si se cumplen las condiciones
+                if (Snake.colisionPared(x, y)) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "¡Has perdido!",
+                            "Snake by dcancelas",
+                            JOptionPane.PLAIN_MESSAGE);
+                    try {
+                        Snake.goToTitleScreen();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    stop();
+                }
+
+                //Establece el tiempo de espera entre las ejecuciones del bucle
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
@@ -114,7 +139,27 @@ public class Snake {
         return escena;
     }
 
-    public void compColisionPared() {
-        
+    public static boolean generarComida(GraphicsContext gc, Image food, Tablero[][] tablero, boolean foodGen) {
+        int f = 0;
+        int c = 0;
+        if (foodGen = true) {
+            f = (int) ((Math.random() * 19) + 1);
+            c = (int) ((Math.random() * 19) + 1);
+        }
+        gc.drawImage(food, tablero[f][c].getX(), tablero[f][c].getY());
+        return false;
+    }
+
+    public static boolean colisionPared(double[] x, double[] y) {
+        if (x[0] < 30 || y[0] < 60 || x[0] > 505 || y[0] > 535) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void goToTitleScreen() throws Exception {
+        Stage primaryStage = Main.getPrimaryStage();
+        primaryStage.setScene(Main.titleScreen());
+        primaryStage.show();
     }
 }

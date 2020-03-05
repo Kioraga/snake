@@ -26,13 +26,13 @@ public class Tablero {
     }
 
     public static Tablero[][] crearTablero() {
-        Tablero[][] tablero = new Tablero[20][20];
+        Tablero[][] tablero = new Tablero[22][22];
 
-        double iX = 30;
-        double iY = 60;
-        for (int i = 0; i < 20; i++) {
+        double iX = 5;
+        double iY = 35;
+        for (int i = 0; i < 22; i++) {
             tablero[i][0] = new Tablero(iX, iY);
-            for (int j = 1; j < 20; j++) {
+            for (int j = 1; j < 22; j++) {
                 tablero[i][j] = new Tablero(tablero[i][j-1].getX()+25, iY);
             }
             iY = iY + 25;
