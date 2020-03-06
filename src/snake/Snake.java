@@ -129,7 +129,7 @@ public class Snake {
                 }
 
                 //Detiene el AnimationTimer si se cumplen las condiciones
-                if (Snake.colisionPared(x, y)) {
+                if (Snake.colisionPared(x, y) || Snake.colisionSnake(x, y, auxX, auxY, snakeSize)) {
                     try {
                         Snake.goToTitleScreen();
                     } catch (Exception e) {
@@ -140,7 +140,7 @@ public class Snake {
 
                 //Establece el tiempo de espera entre las ejecuciones del bucle
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(150); //200
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -156,6 +156,15 @@ public class Snake {
 
         if (xComida == x[0] && yComida == y[0]) {
             return true;
+        }
+        return false;
+    }
+
+    public static boolean colisionSnake(double[] x, double[] y, double[] auxX, double[] auxY, int[] snakeSize) {
+        for (int i = 1; i < snakeSize[0]-1; i++) {
+            if (x[0] == auxX[i] && y[0] == auxY[i]) {
+                return true;
+            }
         }
         return false;
     }
