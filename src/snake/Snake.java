@@ -52,8 +52,8 @@ public class Snake {
         final double[] yComida = {0};
         final double[] x = {tablero[f[0]][c[0]].getX()};
         final double[] y = {tablero[f[0]][c[0]].getY()};
-        final double auxX[] = new double[400];
-        final double auxY[] = new double[400];
+        final double[] auxX = new double[400];
+        final double[] auxY = new double[400];
 
         new AnimationTimer() {
             public void handle(long now) {
