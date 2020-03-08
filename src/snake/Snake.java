@@ -37,6 +37,7 @@ public class Snake {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         Image background = new Image("file:resources/background.png");
+        Image border = new Image("file:resources/border.png");
         Image snakeSp = new Image("file:resources/snake.png");
         Image food = new Image("file:resources/food.png");
 
@@ -47,8 +48,8 @@ public class Snake {
         final int[] dir = {4};
         final int[] f = {11};
         final int[] c = {7};
-        final int[] fComida = {0};
-        final int[] cComida = {0};
+        final double[] xComida = {0};
+        final double[] yComida = {0};
         final double[] x = {tablero[f[0]][c[0]].getX()};
         final double[] y = {tablero[f[0]][c[0]].getY()};
         final double auxX[] = new double[400];
@@ -98,11 +99,15 @@ public class Snake {
                 gc.drawImage(background, 0, 0);
 
                 //Dibuja la comida en una casilla aleatoria
+                int fComida;
+                int cComida;
                 if (foodGen[0]) {
-                    fComida[0] = (int) ((Math.random() * 19) + 1);
-                    cComida[0] = (int) ((Math.random() * 19) + 1);
+                    fComida = (int) ((Math.random() * 19) + 1);
+                    cComida = (int) ((Math.random() * 19) + 1);
+                    xComida[0] = (int) tablero[fComida][cComida].getX();
+                    yComida[0] = (int) tablero[fComida][cComida].getY();
                 }
-                gc.drawImage(food, tablero[fComida[0]][cComida[0]].getX(), tablero[fComida[0]][cComida[0]].getY());
+                gc.drawImage(food, xComida[0], yComida[0]);
                 foodGen[0] = false;
 
                 //Dibuja el bloque principal de la seroiente
@@ -111,6 +116,9 @@ public class Snake {
                 //Dibuja el resto de bloques que forman la serpiente a partir de la variable "snakeSize"
                 for (int i = 0; i < snakeSize[0]-1; i++) {
                     gc.drawImage(snakeSp, auxX[i], auxY[i]);
+
+                    if (auxX[i] == xComida[0] && auxY[i] == yComida[0])
+                        foodGen[0] = true;
                 }
                 for (int i = snakeSize[0]-2; i > 0; i--) {
                     auxX[i] = auxX[i-1];
@@ -119,11 +127,14 @@ public class Snake {
                 auxX[0] = x[0];
                 auxY[0] = y[0];
 
+                //Dibuja los bordes
+                gc.drawImage(border, 0, 0);
+
                 //Muestra las cordenadas actuales
-                System.out.println("x: "+x[0]+" | y: "+y[0]);
+                //System.out.println("x: "+x[0]+" | y: "+y[0]);
 
                 //Aumenta el tamaño de la serpiente al comer
-                if (Snake.comer(fComida, cComida, x, y, tablero)) {
+                if (Snake.comer(xComida, yComida, x, y)) {
                     snakeSize[0]++;
                     foodGen[0] = true;
                 }
@@ -150,11 +161,8 @@ public class Snake {
         return escena;
     }
 
-    public static boolean comer(int[] fComida, int[] cComida, double[] x, double[] y, Tablero[][] tablero) {
-        double xComida = tablero[fComida[0]][cComida[0]].getX();
-        double yComida = tablero[fComida[0]][cComida[0]].getY();
-
-        if (xComida == x[0] && yComida == y[0]) {
+    public static boolean comer(double[] xComida, double[] yComida, double[] x, double[] y) {
+        if (xComida[0] == x[0] && yComida[0] == y[0]) {
             return true;
         }
         return false;
@@ -178,7 +186,7 @@ public class Snake {
 
     public static void goToTitleScreen() throws Exception {
         Stage primaryStage = Main.getPrimaryStage();
-        primaryStage.setScene(Main.titleScreen());
+        primaryStage.setScene(Main.titleScreen(false));
         primaryStage.show();
     }
 }
