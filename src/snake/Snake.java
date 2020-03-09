@@ -8,13 +8,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import snake.titlescreen.Options;
 
 import java.util.ArrayList;
 
 public class Snake {
 
     private static int puntMax = 0;
+    private static int dificultad = Options.normal;
 
     public static Scene start() {
         Group root = new Group();
@@ -138,8 +141,8 @@ public class Snake {
                 //Dibuja la puntuación
                 gc.setFont(Font.font("System", 20));
                 gc.setFill(Color.WHITE);
-                gc.fillText("Puntuación: "+puntuacion[0], 80, 38);
-                gc.fillText("Puntuación máxima: "+puntMax, 240, 38);
+                gc.setTextAlign(TextAlignment.CENTER);
+                gc.fillText("Puntuación: "+puntuacion[0]+"    Récord: "+puntMax, Math.round(canvas.getWidth()/2), 38);
 
                 //Muestra las cordenadas actuales
                 //System.out.println("x: "+x[0]+" | y: "+y[0]);
@@ -165,7 +168,7 @@ public class Snake {
 
                 //Establece el tiempo de espera entre las ejecuciones del bucle
                 try {
-                    Thread.sleep(150); //200
+                    Thread.sleep(dificultad);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -202,5 +205,12 @@ public class Snake {
         Stage primaryStage = Main.getPrimaryStage();
         primaryStage.setScene(Main.titleScreen(false));
         primaryStage.show();
+    }
+
+    public static int getDificultad() {
+        return dificultad;
+    }
+    public static void setDificultad(int dificultad) {
+        Snake.dificultad = dificultad;
     }
 }

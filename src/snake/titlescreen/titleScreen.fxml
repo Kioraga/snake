@@ -10,12 +10,12 @@
          <font>
             <Font size="81.0" />
          </font></Text>
-      <Button fx:id="playButton" layoutX="182.0" layoutY="266.0" mnemonicParsing="false" onAction="#startGame" prefHeight="58.0" prefWidth="197.0" text="Jugar">
+      <Button fx:id="playButton" layoutX="182.0" layoutY="266.0" mnemonicParsing="false" onAction="#startGame" prefHeight="58.0" prefWidth="197.0" style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;" text="Jugar">
          <font>
             <Font size="27.0" />
          </font>
       </Button>
-      <Button fx:id="optionButton" layoutX="181.0" layoutY="338.0" mnemonicParsing="false" onAction="#goToOpciones" prefHeight="58.0" prefWidth="197.0" text="Opciones">
+      <Button fx:id="optionButton" layoutX="181.0" layoutY="338.0" mnemonicParsing="false" onAction="#goToOpciones" prefHeight="58.0" prefWidth="197.0" style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;" text="Opciones">
          <font>
             <Font size="27.0" />
          </font>

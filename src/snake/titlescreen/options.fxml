@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="590.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snake.titlescreen.Options">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snake.titlescreen.Options">
    <children>
       <Text layoutX="156.0" layoutY="126.0" text="Opciones" textAlignment="CENTER" wrappingWidth="248.25390625">
          <font>
@@ -19,25 +19,28 @@
             </Text>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="354.0" style="-fx-spacing: 10;">
                <children>
-                  <Button fx:id="easyDifficulty" mnemonicParsing="false" prefHeight="37.0" prefWidth="93.0" text="Fácil" textAlignment="CENTER">
+                  <Button fx:id="bFacil" mnemonicParsing="false" onAction="#dificultadFacil" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;" text="Fácil" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="normalDifficulty" layoutX="141.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="93.0" text="Normal" textAlignment="CENTER">
+                  <Button fx:id="bNormal" layoutX="141.0" layoutY="10.0" mnemonicParsing="false" onAction="#dificultadNormal" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;" text="Normal" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="hardDifficulty" layoutX="192.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="93.0" text="Difícil">
+                  <Button fx:id="bDificil" layoutX="192.0" layoutY="10.0" mnemonicParsing="false" onAction="#dificultadDificil" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;" text="Difícil">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-         </children>
-      </VBox>
-      <Button fx:id="backButton" layoutX="249.0" layoutY="488.0" mnemonicParsing="false" onAction="#goToTitleScreen" prefWidth="80.0" text="Volver" />
+         </children></VBox>
+      <Button fx:id="backButton" layoutX="249.0" layoutY="488.0" mnemonicParsing="false" onAction="#goToTitleScreen" prefWidth="80.0" style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;" text="Volver">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
