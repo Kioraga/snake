@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snake.titlescreen.TitleScreen">
+   <children>
+      <Text layoutX="133.0" layoutY="161.0" text="Snake" textAlignment="CENTER" wrappingWidth="294.13037109375">
+         <font>
+            <Font size="81.0" />
+         </font></Text>
+      <Button fx:id="playButton" layoutX="182.0" layoutY="266.0" mnemonicParsing="false" onAction="#startGame" prefHeight="58.0" prefWidth="197.0" text="Jugar">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Button>
+      <Button fx:id="optionButton" layoutX="181.0" layoutY="338.0" mnemonicParsing="false" onAction="#goToOpciones" prefHeight="58.0" prefWidth="197.0" text="Opciones">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Button>
+      <Text layoutX="223.0" layoutY="578.0" text="Creado por dcancelas" textAlignment="CENTER">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
