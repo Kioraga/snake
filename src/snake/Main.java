@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Snake by dcancelas");
-        primaryStage.setScene(Main.titleScreen(true));
+        primaryStage.setScene(Main.titleScreen(false));
         primaryStage.setResizable(false);
         primaryStage.show();
 
