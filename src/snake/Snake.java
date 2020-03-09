@@ -66,13 +66,13 @@ public class Snake {
         new AnimationTimer() {
             public void handle(long now) {
                 //Comprueba la tecla pulsada y establece la dirección
-                if ((input.contains("W") || input.contains("UP"))  && dir[0] != 3 && !input.contains("A") && !input.contains("D"))
+                if ((input.contains("W") || input.contains("UP"))  && dir[0] != 3 && !input.contains("A") && !input.contains("D") && !input.contains("LEFT") && !input.contains("RIGHT"))
                     dir[0] = 1;
-                if ((input.contains("A") || input.contains("LEFT")) && dir[0] != 4 && !input.contains("W") && !input.contains("S"))
+                if ((input.contains("A") || input.contains("LEFT")) && dir[0] != 4 && !input.contains("W") && !input.contains("S") && !input.contains("UP") && !input.contains("DOWN"))
                     dir[0] = 2;
-                if ((input.contains("S") || input.contains("DOWN")) && dir[0] != 1 && !input.contains("A") && !input.contains("D"))
+                if ((input.contains("S") || input.contains("DOWN")) && dir[0] != 1 && !input.contains("A") && !input.contains("D") && !input.contains("LEFT") && !input.contains("RIGHT"))
                     dir[0] = 3;
-                if ((input.contains("D") || input.contains("RIGHT")) && dir[0] != 2 && !input.contains("W") && !input.contains("S"))
+                if ((input.contains("D") || input.contains("RIGHT")) && dir[0] != 2 && !input.contains("W") && !input.contains("S") && !input.contains("UP") && !input.contains("DOWN"))
                     dir[0] = 4;
 
                 //Comprueba la dirección y actualiza la cordenada correspondiente
